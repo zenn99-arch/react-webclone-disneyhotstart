@@ -1,7 +1,7 @@
-import { auth, provider } from "../firebase";
 import styled from "styled-components";
 
 import React from "react";
+import { auth, provider } from "../firebase";
 
 
 
