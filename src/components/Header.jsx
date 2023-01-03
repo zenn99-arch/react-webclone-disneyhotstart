@@ -1,14 +1,17 @@
+import { auth, provider } from "../firebase";
 import styled from "styled-components";
 
 import React from "react";
-import { auth, provider } from "../firebase";
+
 
 
 const Header = () => {
 
-  const handleAuth = () => {
-    auth.signInWithPopup(provider)
-  }
+const handleAuth = () => {
+  auth.signInWithPopup(provider).then((result) => {
+    console.log(result)
+  } )
+}
 
   return (
     <Nav>
@@ -84,12 +87,13 @@ const NavMenu = styled.div`
   position: relative;
   margin-right: auto;
   margin-left: 25px;
-
+  
   a {
     display: flex;
     align-items: center;
     padding: 0 12px;
-
+    cursor: pointer;
+    
     img {
       height: 20px;
       min-height: 20px;
