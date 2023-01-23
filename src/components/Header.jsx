@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import { auth, provider } from "../firebase";
+
 import {
   selectUserName,
   selectUserPhoto,
@@ -16,35 +16,8 @@ const Header = (props) => {
   const userName = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
 
-  useEffect(() => {
-    auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        setUser(user);
-        navigate.push("/home");
-      }
-    });
-  }, [userName]);
 
-  const handleAuth = () => {
-    if (!userName) {
-      auth
-        .signInWithPopup(provider)
-        .then((result) => {
-          setUser(result.user);
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
-    } else if (userName) {
-      auth
-        .signOut()
-        .then(() => {
-          dispatch(setSignOutState());
-          navigate.push("/");
-        })
-        .catch((err) => alert(err.message));
-    }
-  };
+
 
   const setUser = (user) => {
     dispatch(
@@ -56,13 +29,19 @@ const Header = (props) => {
     );
   };
 
+  const username = 'true'
+
+  const handleAuth = () =>{
+
+  }
+
   return (
     <Nav>
       <Logo>
         <img src="/images/logo.svg" alt="Disney+" />
       </Logo>
 
-      {!userName ? (
+      {!username ? (
         <Login onClick={handleAuth}>Login</Login>
       ) : (
         <>
